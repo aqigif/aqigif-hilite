@@ -17,9 +17,13 @@
 # along with hilite.me.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
-from urllib import quote, unquote
+from urllib.parse import quote, unquote
 
 from flask import Flask, make_response, render_template, request
+from flask_cors import CORS, cross_origin
+
+app = Flask(__name__)
+CORS(app, support_credentials=True)
 
 from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
@@ -30,6 +34,7 @@ from tools import *
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def index():
         code = request.form.get('code', "print 'hello world!'")
         lexer = (
@@ -61,6 +66,7 @@ def index():
         return response
 
 @app.route("/api", methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def api():
     code = request.values.get('code', '')
     if not code:

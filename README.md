@@ -1,3 +1,6 @@
+# aqigif-hilite
+i get this package from [hilite.me](http://hilite.me/) and just fix it CORS issue hahah
+
 # hilite.me
 
 [hilite.me](http://hilite.me/) is a small webapp that converts your code
