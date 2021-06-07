@@ -17,6 +17,7 @@
 # along with hilite.me.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+import os
 from urllib.parse import quote, unquote
 
 from flask import Flask, make_response, render_template, request
@@ -24,6 +25,8 @@ from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
+
+port = int(os.environ.get('PORT', 5000))
 
 from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
@@ -97,4 +100,4 @@ def api():
     return response
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=port, debug=True)
